@@ -3,18 +3,18 @@
 .summary-box {
     @include flex(stretch, flex-start);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 1rem;
 
     &__chart {
-        width: 7rem;
+        width: 5rem;
 
         &__value {
-            margin-top: -30%;
             font-weight: 700;
         }
     }
 
     &__title{
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
 
     &__subtitle{
@@ -22,9 +22,10 @@
     }
 
     &__info {
-        width: 10rem;
+        width: 13rem;
         @include flex(flex-start, space-between);
         flex-direction: column;
+        
 
         &__title {
             font-size: $fontSizeMedium;
@@ -39,7 +40,8 @@
 
         &__value {
             font-weight: 700;
-            font-size: $fontSizeLarge;
+            font-size: 1rem;
+            margin-top: .5rem;
             color: $black;
         }
     }

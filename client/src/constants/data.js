@@ -1,11 +1,7 @@
 import React,{useState , useEffect} from 'react'
 import './../pages1/styles.css'
-// import './styles.css'
-//import { Bar } from 'react-chartjs-2'
-//import Box from '../components/box/Box'
-//import DashboardWrapper, { DashboardWrapperMain, DashboardWrapperRight } from '../components1/dashboard-wrapper/DashboardWrapper'
-import SummaryBox, { SummaryBoxSpecial } from '../components1/summary-box/SummaryBox'
-import { colors, data } from '../constants'
+import SummaryBox from '../components1/summary-box/SummaryBox'
+import { images} from '../constants'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -16,8 +12,6 @@ import {
     Tooltip,
     Legend
 } from 'chart.js'
-//import OverallList from '../components1/overall-list/OverallList'
-//import RevenueList from '../components/revenue-list/RevenueList'
 
 ChartJS.register(
     CategoryScale,
@@ -29,11 +23,9 @@ ChartJS.register(
     Legend
 )
 
-console.log(data)
 const Dashboard = () => {
     const [inwardData, setinwardData] = useState([])
     const [outwardData, setoutwardData] = useState([])
-    const [CompleteData, setCompleteData] = useState([])
   
     useEffect(() => {
       fetch("/inward")
@@ -51,16 +43,7 @@ const Dashboard = () => {
         setoutwardData(res);
       })
     }, [])
-  
-    useEffect(() => {
-      if(inwardData&&outwardData){
-        let res = {}
-        res.inward = inwardData;
-        res.outward = outwardData;
-        setCompleteData(res);
-      }
-    }, [inwardData , outwardData])
-  
+
     const farmerMarkets = []
     const farmers = []
     let TotalPurchaseQty = 0
@@ -102,6 +85,10 @@ const Dashboard = () => {
     let maxSalesQty = 100000;
 
     const data = {
+      user: {
+        name: 'Wingrow Agritech',
+        img: images.avt
+      },
         summary: [
             {
                 title: 'Farmers Markets',
@@ -149,26 +136,11 @@ const Dashboard = () => {
             }
         ]
        
-        // overall: [
-        //     {
-        //         value: '1200',
-        //         title: 'Farmers'
-        //     },
-        //     {
-        //         value: '12000',
-        //         title: 'Customer Served'
-        //     },
-        //     {
-        //         value: '1.234K',
-        //         title: 'Farmers Markets'
-        //     }
-            
-        // ]
         
     }
 
     return (
-        // <DashboardWrapper>
+
                 <div className="main_wrapper">
                             {
                                 data.summary.map((item, index) => (
@@ -178,7 +150,7 @@ const Dashboard = () => {
                                 ))
                             }                 
                 </div>
-        // </DashboardWrapper>
+
     )
 }
 
@@ -187,13 +159,9 @@ export default Dashboard
 
 
 
-// import images from "./images"
+
 
 // const data = {
-//     //user: {
-//     //    name: 'Wingrow Agritech',
-//     //    img: images.avt
-//     //},
 //     summary: [
 //         {
 //             title: 'Farmers Markets',

@@ -1,16 +1,9 @@
 .main_wrapper{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    font-size: 1.2rem;
-}
-
-
-.secondary_wrapper{
     display: flex;
-    flex-direction: column;
-    margin: 1rem 2rem;
-    /* box-shadow: 0.1rem 1rem 1rem rgb(124, 119, 119); */
-    
-
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    font-size: 1rem;
+    margin: 1rem;
 }

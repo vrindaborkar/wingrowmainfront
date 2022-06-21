@@ -27,7 +27,8 @@ ChartJS.register(
 
 const SummaryBox = ({ item }) => {
     return (
-        <Box>
+        <>
+       {(item)?<Box>
             <div className='summary-box'>
                 <div className="summary-box__info">
                     <div className="summary-box__info__title">
@@ -54,7 +55,8 @@ const SummaryBox = ({ item }) => {
                     </CircularProgressbarWithChildren>
                 </div>
             </div>
-        </Box>
+        </Box>:<h2>Loading...</h2>}
+        </>
     )
 }
 

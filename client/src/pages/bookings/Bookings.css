@@ -1,12 +1,11 @@
 .bookings_main{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   height: 87vh;
   width: 100vw;
   margin-top: 13vh;
-
 }
 
 .vendor_form{
@@ -24,6 +23,7 @@
   letter-spacing: 5px;
   transition: all .3s ease;
   flex-direction: row;
+  margin: 0 2rem;
 }
 .book_stall{
   width: 20rem;
@@ -40,6 +40,7 @@
   letter-spacing: 5px;
   transition: all .3s ease;
   flex-direction: row;
+  margin: 0 2rem;
 
 }
 
@@ -49,4 +50,23 @@
 
 .book_stall:hover{
   transform: translateY(-10px) scale(1.1);
+}
+
+
+@media screen and (max-width:600px) {
+  .bookings_main{
+    flex-direction: column;
+  }
+  .book_stall{
+    height: 10rem;
+    width: 10rem;
+    font-size: .8rem;
+    text-align: center;
+  }
+  .vendor_form{
+    height: 10rem;
+    width: 10rem;
+    font-size: .8rem;
+    text-align: center;
+  }
 }

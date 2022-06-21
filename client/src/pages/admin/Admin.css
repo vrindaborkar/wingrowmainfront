@@ -94,17 +94,6 @@
         font-size: 1rem;
     }
 
-@media screen and (max-width:600px) {
-    .admin{
-        flex-direction: column;
-    }
-
-    .admin_data{
-        font-size: 1rem;
-    }
-}
-
-
 .vendors_mainfeed{
     font-size: 1.5rem;
     width: 80vw;
@@ -207,4 +196,35 @@
 }
 .overalldata:hover{
     transform: translateY(-10px) scale(1.1);
+}
+
+
+@media screen and (max-width:600px) {
+    .admin{
+        flex-direction: column;
+    }
+
+    .admin_data{
+        font-size: 1rem;
+    }
+
+    .admin_main{
+        flex-direction: column;
+        font-size: 1rem;
+    }
+    .overalldata{
+        width: 10rem;
+        height: 10rem;
+        text-align: center;
+    }
+    .vendorsdata{
+        width: 10rem;
+        height: 10rem;
+        text-align: center;
+    }
+    .stalls{
+        width: 10rem;
+        height: 10rem;
+        text-align: center;
+    }
 }

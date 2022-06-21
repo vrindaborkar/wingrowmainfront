@@ -35,7 +35,7 @@ function Dashboard() {
     </div>
 
 
-    <div className="grid_info" style={{backgroundColor: 'antiquewhite'}}>
+    <div className="grid_info">
       <h1 className="grid_head heading_tertiary">
          Products before Covid 19
       </h1>

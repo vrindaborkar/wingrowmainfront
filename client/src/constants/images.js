@@ -1,6 +1,6 @@
 const images = {
-    //logo: require('../assets/images/logo.svg').default,
-    avt: require('../assets/images/Wingrow_LOGO.jpg')
+    logo: require('../assets/images/Wingrow.jpg').default,
+    avt: require('../assets/images/Wingrow.jpg')
 }
 
 export default images

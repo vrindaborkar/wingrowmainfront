@@ -26,7 +26,6 @@ ChartJS.register(
 const Dashboard = () => {
     const [inwardData, setinwardData] = useState([])
     const [outwardData, setoutwardData] = useState([])
-    const [CompleteData, setCompleteData] = useState([])
   
     useEffect(() => {
       fetch("/inward")
@@ -44,15 +43,7 @@ const Dashboard = () => {
         setoutwardData(res);
       })
     }, [])
-  
-    useEffect(() => {
-      if(inwardData&&outwardData){
-        let res = {}
-        res.inward = inwardData;
-        res.outward = outwardData;
-        setCompleteData(res);
-      }
-    }, [inwardData , outwardData])
+
   
     const farmerMarkets = []
     const farmers = []
@@ -144,29 +135,10 @@ const Dashboard = () => {
             }
         ]
        
-        // overall: [
-        //     {
-        //         value: '1200',
-        //         title: 'Farmers'
-        //     },
-        //     {
-        //         value: '12000',
-        //         title: 'Customer Served'
-        //     },
-        //     {
-        //         value: '1.234K',
-        //         title: 'Farmers Markets'
-        //     }
-            
-        // ]
         
     }
-setTimeout(() => {
-    console.log(data)
-}, 5000);
 
     return (
-        // <DashboardWrapper>
                 <div className="main_wrapper">
                             {
                                 data.summary.map((item, index) => (
@@ -176,7 +148,6 @@ setTimeout(() => {
                                 ))
                             }                 
                 </div>
-        // </DashboardWrapper>
     )
 }
 

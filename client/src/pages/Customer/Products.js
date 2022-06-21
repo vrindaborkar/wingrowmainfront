@@ -6,7 +6,6 @@ import Button from './Button'
 
 const ProductsPage = () => {
   return (
-    <div className="main_customer_page">
     <ShopContext.Consumer>
       {context => (
         <React.Fragment>
@@ -21,7 +20,6 @@ const ProductsPage = () => {
         </React.Fragment>
       )}
     </ShopContext.Consumer>
-    </div>
   );
 };
 
