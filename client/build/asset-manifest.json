@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4c407803.css",
+    "main.js": "/static/js/main.36a03e4e.js",
+    "static/media/green_leaf_back.jpg": "/static/media/green_leaf_back.d3f9730478ed0ca0a985.jpg",
+    "static/media/Wingrow_LOGO.jpg": "/static/media/Wingrow_LOGO.deb74f5c808c493136b5.jpg",
+    "index.html": "/index.html",
+    "main.4c407803.css.map": "/static/css/main.4c407803.css.map",
+    "main.36a03e4e.js.map": "/static/js/main.36a03e4e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4c407803.css",
+    "static/js/main.36a03e4e.js"
+  ]
+}

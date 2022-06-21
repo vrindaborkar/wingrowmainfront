@@ -1,0 +1,117 @@
+.main_farmers_page{
+    height: 100%;
+    background-image: url('../../../public/images/green_leaf_back.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.farmers_main{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100vw;
+    margin-top: 13vh;
+    flex-direction: column;
+}
+
+.farmers_info{
+    height: 20vh;
+    width: 80vw;
+    margin: 1rem auto;
+    border: 1px black solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.heading_primary{
+    display: inline-block;
+    font-size: 1.6rem;
+}
+
+.farmers_data{
+    height: 67vh;
+    width: 80vw;
+    margin: 1rem auto;
+    border: 1px black solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 1rem;
+}
+
+
+.inward_data{
+    display: flex;
+    flex: 1;
+    height: 100%;
+    border-right: 1px black solid;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    flex-direction: column;
+}
+
+.outward_data{
+    display: flex;
+    flex: 1;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    flex-direction: column;
+}
+
+.heading_secondary{
+    font: 1.3rem;
+    font-weight: 600;
+}
+
+
+.logout_btn{
+    position: absolute;
+    top: 15vh;
+    right: 5vw;
+}
+
+.inward_details{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    padding: 1rem;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+.inward_info{
+    flex: 1;
+}
+
+.outward_info{
+    flex: 1;
+}
+
+
+.purchase_info{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    overflow: auto;
+}
+
+.sales_info{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    overflow: auto;
+}
+.body{
+    background-image: url("https://media.istockphoto.com/photos/farmers-food-market-stall-with-variety-of-organic-vegetable-picture-id487491992?k=20&m=487491992&s=612x612&w=0&h=GthWvbSMgJoRMd6uqupQjy8n1JAgvSgzvsEdiidIsdE=");
+    background-color: #cccccc;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    opacity: 1 ;
+}

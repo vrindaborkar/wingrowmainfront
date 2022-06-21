@@ -1,0 +1,119 @@
+.main_customer_page{
+    background-image: url('../../../public/images/green_leaf_back.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.customer_products {
+    width: 50rem;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start ;
+    padding-top: 8rem;
+  }
+  
+  .products_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    
+  }
+  
+  .products_item {
+    width: 60vw;
+    height: 65vh;
+    display: flex;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: 1px 1px 1px 1px grey;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin:1rem auto;
+  }
+  
+
+  .products_img{
+    display: block;
+    height: 100%;
+    width: 60%;
+  }
+
+  .img_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .products_sub_details{
+    font-size: .8rem;
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    padding: 1em;
+  }
+
+  .dropdown{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+  }
+
+  .drop{
+    display: inline-block;
+    margin-left: 1rem;
+  }
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50rem;
+    max-width: 90%;
+    margin: 15rem auto;
+  }
+    
+    .cart_container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .cart_item {
+      font-size: 1rem;
+      height: 60vh;
+      width: 60vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+     background-color: white;
+     border-radius: 1em;
+     text-align: center;
+     margin: .5rem;
+    }
+    
+  
+    .cart_img{
+      display: inline-block;
+      height: 50%;
+      width: 50%;
+    }
+    
+
+    @media screen and (max-width: 600px) {
+      .img_container{
+        flex-direction: column;
+      }
+    }
