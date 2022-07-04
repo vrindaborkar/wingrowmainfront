@@ -3,6 +3,7 @@ import './stallbooking.css'
 import './Bookings.css'
 import Dropdown from './Dropdown'
 import Seats from './Seats'
+import axios from 'axios'
 
 const StallBooking = () => {
 const [Id, setId] = useState("")
@@ -11,6 +12,7 @@ const [availableStalls , setAvailableStalls] = useState([])
 const [bookedStalls , setBookedStalls] = useState([])
 const [numberOfSeats, setNumberOfSeats] = useState(0);
 const [stallsdata, setStallsData] = useState([]);
+const stallPrice = 100;
 
 
 const fetchStalls = async () => {
@@ -31,6 +33,19 @@ const fetchStalls = async () => {
     fetchStalls()
   },[])
 
+  useEffect(() => {
+    const script = document.createElement('script');
+  
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+  
+    document.body.appendChild(script);
+  
+    return () => {
+      document.body.removeChild(script);
+    }
+  }, []);
+
 
   useEffect(() => {
     const updata = availableStalls.filter(function(obj) { return bookedStalls.indexOf(obj) === -1; });
@@ -48,25 +63,9 @@ useEffect(() => {
 
 const confirmBooking = async() => {
   try {
-    const res = await fetch("/stalls" , {
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body: JSON.stringify({
-              location:Id,
-              availablestalls:availableStalls,
-              stalls:Stalls
-          })
-        });
-        const data = await res.json()
-        if(data){
-          setBookedStalls([]);
-          setNumberOfSeats(0);
-          alert(`Seats Booked :${[...bookedStalls]}`)
-        }else{
-          alert("data not added")
-        }
+    const orderUrl = "/orders";
+    const {data} = await axios.post(orderUrl,{amount:stallPrice*bookedStalls.length})
+    initPayment(data.data)
   } catch (error) {
     console.log(error)
   }
@@ -89,6 +88,60 @@ const addSeat = async(ev) => {
   }
 };
 
+const initPayment = (data) => {
+  console.log(data)
+  let bookedStats = bookedStalls.toString()
+     const options = { 
+      key:process.env.KEY_ID,
+      amount:data.amount,
+      currency:data.currency,
+      order_id:data.id,
+      bookedSeats:bookedStats,
+      description:"live",
+      handler:async(response) =>{
+          try {
+              const verifyUrl = "/verify";
+              const {data} = await axios.post(verifyUrl,response)
+              if(data){
+                try {
+                  const res = await fetch("/stalls" , {
+                        method:"POST",
+                        headers:{
+                          "Content-Type":"application/json"
+                        },
+                        body: JSON.stringify({
+                            location:Id,
+                            availablestalls:availableStalls,
+                            stalls:Stalls
+                        })
+                      });
+                      const response = await res.json()
+                      if(response){
+                        alert(`Seats Booked :${[...bookedStalls]}`)
+                      }else{
+                        alert("data not added")
+                      }
+                          setBookedStalls([]);
+                          setNumberOfSeats(0);
+                } catch (error) {
+                  console.log(error)
+                }
+              }else{
+                          setBookedStalls([]);
+                          setNumberOfSeats(0);
+              }
+          } catch (error) {
+              console.log(error)
+          }
+      },
+      theme:{
+          color:"#3399cc"
+      }
+     };
+     const rzp = new window.Razorpay(options);
+      rzp.open();
+
+  }
 
 
   const handleClick = (e) =>{

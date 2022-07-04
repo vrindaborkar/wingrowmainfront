@@ -242,6 +242,7 @@ router.get('/vendors' , async(req,res)=>{
 //order Api
 router.post('/orders' , async(req,res)=>{
     const {amount} = req.body
+    console.log(amount)
 
     try {
         const instance = new Razorpay({

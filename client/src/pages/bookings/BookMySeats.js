@@ -24,7 +24,7 @@ const BookMySeats = ({response}) => {
     }
   }, []);
 
-  const stallPrice = 1000;
+
   const addSeat = (ev) => {
       if(numberOfSeats && !ev.target.className.includes('disabled')) {
           const seatsToBook = parseInt(numberOfSeats, 10);
