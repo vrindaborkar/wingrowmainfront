@@ -16,7 +16,7 @@ const bcrypt = require('bcryptjs/dist/bcrypt');
 const authenticate = require('./middleware/Authenticate')
 const cookieParser = require('cookie-parser')
 const Razorpay = require('razorpay')
-const crypto = require('crypto')
+const crypto = require('crypto');
 
 app.use(cookieParser())
 app.use(cors());
@@ -42,6 +42,24 @@ router.get('/outward' , async(req,res)=>{
 router.get('/stalls' , async(req,res)=>{
     const stallsData = await Stalls.find()
     res.send(stallsData)
+})
+
+router.post('/stalls' , async(req,res)=>{
+    const { stalls , availablestalls , location} = req.body
+    const updates = {
+        location,
+        stalls,
+        availablestalls
+    }
+    const options = {returnNewDocument:true}
+
+    try{
+        const stalldata = await Stalls.findOneAndUpdate({location},updates,options)
+        const resdata = await stalldata.save()
+        res.status(200).send(resdata)
+    } catch (error) {
+        res.status(404).send(error)
+    }
 })
 
 //info page 
@@ -130,7 +148,6 @@ router.post('/inward' ,async(req,res)=>{
         })
         try {
             const inward = new Inward(response)
-            console.log(inward)
             const createInward = await inward.save();
             res.status(201).send(createInward);
         } catch (error) {

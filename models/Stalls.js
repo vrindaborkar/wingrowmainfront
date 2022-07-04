@@ -8,7 +8,11 @@ const requiredString = {
 
 const StallsSchema = mongoose.Schema({
         location:requiredString,
-        data: {
+        stalls:{
+            type:Array,
+            required:true
+        },
+        availablestalls:{
             type:Array,
             required:true
         }

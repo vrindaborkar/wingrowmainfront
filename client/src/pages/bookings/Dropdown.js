@@ -11,7 +11,6 @@ export default function Dropdown({Data,handleClick}) {
     setVal(event.target.value);
   };
 
-  console.log(Data)
 
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -23,14 +22,6 @@ export default function Dropdown({Data,handleClick}) {
         label="Value"
         onChange={handleChange}
       >
-      <MenuItem value={1}>Amanora City</MenuItem>
-      <MenuItem value={2}>Prabhat Road</MenuItem>
-      <MenuItem value={3}>Wanwadi</MenuItem>
-      <MenuItem value={4}>Karve Nagar</MenuItem>
-      <MenuItem value={5}>Hadapsar</MenuItem>
-      <MenuItem value={6}>Bramhasun City</MenuItem>
-      <MenuItem value={7}>Kharadi IT Park</MenuItem>
-      <MenuItem value={8}>Magarpatta</MenuItem>
         {
             Data.map((e,i)=>{
                 return(
@@ -42,5 +33,3 @@ export default function Dropdown({Data,handleClick}) {
     </FormControl>
   );
 }
-
-
