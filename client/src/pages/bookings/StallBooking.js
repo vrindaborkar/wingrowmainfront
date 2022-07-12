@@ -89,7 +89,6 @@ const addSeat = async(ev) => {
 };
 
 const initPayment = (data) => {
-  console.log(data)
   let bookedStats = bookedStalls.toString()
      const options = { 
       key:process.env.KEY_ID,
@@ -120,6 +119,8 @@ const initPayment = (data) => {
                         alert(`Seats Booked :${[...bookedStalls]}`)
                       }else{
                         alert("data not added")
+                        setNumberOfSeats(0);
+                        setBookedStalls([]);
                       }
                           setBookedStalls([]);
                           setNumberOfSeats(0);
@@ -128,10 +129,10 @@ const initPayment = (data) => {
                 }
               }else{
                           setBookedStalls([]);
-                          setNumberOfSeats(0);
               }
           } catch (error) {
               console.log(error)
+              setBookedStalls([]);
           }
       },
       theme:{
