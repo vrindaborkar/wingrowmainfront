@@ -1,29 +1,28 @@
 const express = require('express')
 const app = express();
 const mongoose = require('mongoose');
-require('dotenv/config')
-const bodyParser = require('body-parser')
-app.use(bodyParser.json())
+require('dotenv/config');
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const Inward = require('./models/Inward')
 const Outward = require('./models/Outward')
 const User = require('./models/User')
 const Stalls = require('./models/Stalls')
 const Vendors = require('./models/Vendors')
-const router = express.Router()
+const router = express.Router();
 const cors = require('cors');
 const bcrypt = require('bcryptjs/dist/bcrypt');
-const authenticate = require('./middleware/Authenticate')
-const cookieParser = require('cookie-parser')
-const Razorpay = require('razorpay')
+const authenticate = require('./middleware/Authenticate');
+const cookieParser = require('cookie-parser');
+const Razorpay = require('razorpay');
 const crypto = require('crypto');
-
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(cors());
 app.use('/', router);
-app.use(express.static('client/build'))
+app.use(express.static('client/build'));
+router.use(cors());
 
-router.use(cors())
 
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true , useUnifiedTopology: true} , console.log("connected to db"));
 var db = mongoose.connection;
@@ -31,21 +30,23 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 router.get('/inward' , async(req,res)=>{
     const inwardData = await Inward.find()
-    res.send(inwardData)
+    res.send(inwardData);
 })
 
 router.get('/outward' , async(req,res)=>{
     const outwardData = await Outward.find()
-    res.send(outwardData)
+    res.send(outwardData);
 })
 
 router.get('/stalls' , async(req,res)=>{
     const stallsData = await Stalls.find()
-    res.send(stallsData)
+    res.send(stallsData);
 })
 
-router.post('/stalls' , async(req,res)=>{
-    const { stalls , availablestalls , location} = req.body
+router.post('/stalls' , async(req,res)=>
+{
+    const { stalls , availablestalls , location} = req.body;
+
     const updates = {
         location,
         stalls,
@@ -54,7 +55,7 @@ router.post('/stalls' , async(req,res)=>{
     const options = {returnNewDocument:true}
 
     try{
-        const stalldata = await Stalls.findOneAndUpdate({location},updates,options)
+        const stalldata = await Stalls.findOneAndUpdate({location},updates,options);
         const resdata = await stalldata.save()
         res.status(200).send(resdata)
     } catch (error) {
@@ -64,10 +65,11 @@ router.post('/stalls' , async(req,res)=>{
 
 //info page 
 
-router.get('/info', authenticate , (req,res,next)=>{
-    res.send(req.rootUser)
-})
+router.get('/info', authenticate , (req,res,next)=>
 
+{
+    res.send(req.rootUser)
+});
 
 //register route
                                                                
@@ -75,7 +77,8 @@ router.post('/register' , async(req,res)=>{
     
     const { fname , lname , password , phone } = req.body;
 
-    if(!fname || !lname || !password || !phone){
+    if(!fname || !lname || !password || !phone)
+    {
         return res.status(422).json({error:"please fill the fields properly"})
     }
 
@@ -95,6 +98,7 @@ router.post('/register' , async(req,res)=>{
     }
 })
 
+
 //login route
 
 router.post('/signin', async(req,res)=>{
@@ -107,8 +111,7 @@ router.post('/signin', async(req,res)=>{
         const userLogin = await User.findOne({phone:phone});
         if(userLogin){
             const isMatch = await bcrypt.compare(password , userLogin.password)
-
-           const token = await userLogin.generateAuthToken()
+            const token = await userLogin.generateAuthToken()
 
             res.cookie("jwtoken", token, {
                 expires:new Date(Date.now()+25892000000)
@@ -119,8 +122,9 @@ router.post('/signin', async(req,res)=>{
             }else{
                 return res.status(400).json({error:"invalid Credentials"})
             }
-            
-        }else{
+        }
+            else
+        {
             return res.status(400).json({error:"invalid Credentials"})
         }
         
@@ -129,15 +133,16 @@ router.post('/signin', async(req,res)=>{
     }
 })
 
-
 //logout
 
-router.get('/logout', (req,res)=>{
+router.get('/logout', (req,res)=>
+{
     res.clearCookie('jwtoken')
     res.status(200).send('logout successfully')
 })
 
-router.post('/inward' ,async(req,res)=>{
+router.post('/inward' ,async(req,res)=>
+{
     const {farmer_name , farmers_market ,data, mobile_num} = req.body
     const inwardData = await Inward.findOne({farmer_name,farmers_market,mobile_num})
     if(!inwardData){
@@ -178,14 +183,14 @@ router.post('/outward',async(req,res)=>{
     const {farmer_name , farmers_market , data , mobile_num} = req.body
     const outwardData = await Outward.findOne({farmers_market,mobile_num,farmer_name})
 
-    if(!outwardData){
+    if(!outwardData)
+    {
         const response = {...req.body}
         const {data} = response;
         data.forEach((e)=>{
             response.total_cummulative_sales=e.total_sales
             response.wingrow_sc=e.sales_quantity
-        })
-        console.log(response)
+    })
         try {
             const outward = new Outward(response)
             const createOutward = await outward.save();
@@ -233,17 +238,17 @@ router.post('/vendorsdata', async(req,res)=>{
     }
 })
 
-router.get('/vendors' , async(req,res)=>{
+router.get('/vendors' , async(req,res)=>
+{
     const vendorsData = await Vendors.find()
     res.send(vendorsData)
 })
 
 
 //order Api
-router.post('/orders' , async(req,res)=>{
+router.post('/orders' , async(req,res)=>
+{
     const {amount} = req.body
-    console.log(amount)
-
     try {
         const instance = new Razorpay({
             key_id:process.env.KEY_ID,
@@ -273,34 +278,36 @@ router.post('/orders' , async(req,res)=>{
 
 //payment verify api
 
-router.post('/verify',(req,res)=>{
+router.post('/verify',(req,res)=>
+{
     try {
         const {
-            razotpay_order_id,
+            razorpay_order_id,
             razorpay_payment_id,
             razorpay_signature
         } = req.body
 
-        const sign = razotpay_order_id + "" + razorpay_payment_id
-        const expectedSign = crypto
-        .createHmac("sha256",process.env.KEY_SECRET)
+        const sign = razorpay_order_id + "" + razorpay_payment_id
+        const expectedSign = crypto.createHmac("sha256","VfWVFYsaTjII8KuHoUcIH5BS")
         .update(sign.toString())
         .digest("hex");
+        
+        if(razorpay_signature===expectedSign)
 
-        if(razorpay_signature===expectedSign){
+        {
             res.status(200).json({message:"payment verification succesful"})
         }
-        else{
-            return res.status(500).json({message:"internal error occured"})
+        else
+        {
+            return res.status(500).json({message:"payment failed"})
         }
-        
-    } catch (error) {
+
+    } catch (error) 
+    {
         console.log(error)
         res.status(500).json({message:"internal error occured"})
     }
 })
-
-
 
     if(process.env.NODE_ENV == "production"){
         app.use(express.static('client/build'))
@@ -310,4 +317,3 @@ router.post('/verify',(req,res)=>{
     app.listen(PORT, () => {
         console.log(`Server is listening on ${PORT}!!!!!!!!!`);
     });
-

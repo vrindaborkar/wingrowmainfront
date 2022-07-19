@@ -12,8 +12,6 @@ const [availableStalls , setAvailableStalls] = useState([])
 const [bookedStalls , setBookedStalls] = useState([])
 const [numberOfSeats, setNumberOfSeats] = useState(0);
 const [stallsdata, setStallsData] = useState([]);
-const stallPrice = 100;
-
 
 const fetchStalls = async () => {
   fetch('/stalls',{
@@ -35,22 +33,19 @@ const fetchStalls = async () => {
 
   useEffect(() => {
     const script = document.createElement('script');
-  
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
-  
     document.body.appendChild(script);
-  
     return () => {
       document.body.removeChild(script);
     }
   }, []);
 
-
   useEffect(() => {
     const updata = availableStalls.filter(function(obj) { return bookedStalls.indexOf(obj) === -1; });
     setAvailableStalls(updata)//eslint-disable-next-line
   }, [bookedStalls]);
+
 
 useEffect(() => {
   const temp = stallsdata.find(e=>e.location===Id)
@@ -64,12 +59,13 @@ useEffect(() => {
 const confirmBooking = async() => {
   try {
     const orderUrl = "/orders";
-    const {data} = await axios.post(orderUrl,{amount:stallPrice*bookedStalls.length})
+    const {data} = await axios.post(orderUrl,{amount:100})
     initPayment(data.data)
   } catch (error) {
     console.log(error)
   }
 };
+
 
 const addSeat = async(ev) => {
   if(numberOfSeats && !ev.target.className.includes('disabled')) {
@@ -88,51 +84,56 @@ const addSeat = async(ev) => {
   }
 };
 
-const initPayment = (data) => {
+
+// const initPayment = (data) => {
+//   let bookedStats = bookedStalls.toString()
+//      const options = { 
+//       key:process.env.KEY_ID,
+//       amount:data.amount,
+//       currency:data.currency,
+//       order_id:data.id,
+//       bookedSeats:bookedStats,
+//       description:"Wingrow Agritech",
+//       handler:async(response) =>{
+//         try {
+//             const verifyUrl = "/verify";
+//             const {data} = await axios.post(verifyUrl,response)
+//             console.log(data)
+//         } catch (error) {
+//             console.log(error)
+//         }
+//     },
+//     theme:{
+//         color:"#3399cc"
+//     }
+//    };
+//      const rzp = new window.Razorpay(options);
+//       rzp.open();
+//}
+
+
+
+const initPayment = (data) => 
+{
   let bookedStats = bookedStalls.toString()
      const options = { 
-      key:process.env.KEY_ID,
+      key:"rzp_test_eQTAt2BersVRNB",
       amount:data.amount,
       currency:data.currency,
       order_id:data.id,
-      bookedSeats:bookedStats,
-      description:"live",
+      bookedStalls:bookedStats,
+      description:"Wingrow Agritech",
+
+      
       handler:async(response) =>{
           try {
               const verifyUrl = "/verify";
               const {data} = await axios.post(verifyUrl,response)
-              if(data){
-                try {
-                  const res = await fetch("/stalls" , {
-                        method:"POST",
-                        headers:{
-                          "Content-Type":"application/json"
-                        },
-                        body: JSON.stringify({
-                            location:Id,
-                            availablestalls:availableStalls,
-                            stalls:Stalls
-                        })
-                      });
-                      const response = await res.json()
-                      if(response){
-                        alert(`Seats Booked :${[...bookedStalls]}`)
-                      }else{
-                        alert("data not added")
-                        setNumberOfSeats(0);
-                        setBookedStalls([]);
-                      }
-                          setBookedStalls([]);
-                          setNumberOfSeats(0);
-                } catch (error) {
-                  console.log(error)
-                }
-              }else{
-                          setBookedStalls([]);
-              }
+              console.log(data)
           } catch (error) {
               console.log(error)
-              setBookedStalls([]);
+              setBookedStalls([])
+              setNumberOfSeats(0)
           }
       },
       theme:{
@@ -141,11 +142,11 @@ const initPayment = (data) => {
      };
      const rzp = new window.Razorpay(options);
       rzp.open();
+  } 
 
-  }
 
-
-  const handleClick = (e) =>{
+  const handleClick = (e) =>
+  {
     setId(e.target.innerText)
     fetchStalls()
   }
@@ -160,13 +161,14 @@ const initPayment = (data) => {
         <div>
           <p>How Many Stalls Would You Like to Book?</p>
           <input value={numberOfSeats} onChange={(ev) => setNumberOfSeats(ev.target.value)}/>
-                  {(Id!=="")?<Seats values={Stalls}
-                   availableSeats={availableStalls}
-                   bookedSeats={bookedStalls}
-                   addSeat={addSeat}/>:
-                   <h2 style={{margin:"auto",padding:"2rem"}}>Please select the market</h2>}
-                   <button onClick={confirmBooking}>Book Stalls</button>
-        </div></>:<h2>Loading..</h2>}
+                {(Id!=="")?
+                <Seats values={Stalls}
+                availableSeats={availableStalls}
+                bookedSeats={bookedStalls}
+                addSeat={addSeat}/>:
+                <h2 style={{margin:"4rem",padding:"2rem"}}>Please select the market</h2>}
+                <button onClick={confirmBooking}>Book Stalls</button>
+                </div></>:<h2>Loading..</h2>}
     </div>
   )
 }
