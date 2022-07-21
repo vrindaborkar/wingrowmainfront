@@ -287,11 +287,12 @@ router.post('/verify',(req,res)=>
             razorpay_signature
         } = req.body
 
-        const sign = razorpay_order_id + "" + razorpay_payment_id
+        const sign = razorpay_order_id + "|" + razorpay_payment_id;
         const expectedSign = crypto.createHmac("sha256","VfWVFYsaTjII8KuHoUcIH5BS")
         .update(sign.toString())
         .digest("hex");
         
+
         if(razorpay_signature===expectedSign)
 
         {
@@ -305,7 +306,7 @@ router.post('/verify',(req,res)=>
     } catch (error) 
     {
         console.log(error)
-        res.status(500).json({message:"internal error occured"})
+        res.status(500).json({message:"internal error"})
     }
 })
 
