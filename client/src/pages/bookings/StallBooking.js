@@ -117,7 +117,7 @@ const initPayment = (data) =>
 {
   let bookedStats = bookedStalls.toString()
      const options = { 
-      key:"rzp_test_eQTAt2BersVRNB",
+      key:process.env.KEY_ID,
       amount:data.amount,
       currency:data.currency,
       order_id:data.id,
