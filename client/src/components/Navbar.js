@@ -7,6 +7,19 @@ import { navItems } from "./NavItems.js";
 function Navbar() {
   const [mobile, setMobile] = useState(false);
   const [sidebar, setSidebar] = useState(false);
+  const [show, setShow] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }//eslint-disable-next-line
+  }, [lastScrollY]);
 
   useEffect(() => {
     if (window.innerWidth < 1065) {
@@ -30,9 +43,23 @@ function Navbar() {
     };
   }, []);
 
+  const controlNavbar = () => {
+    if (typeof window !== 'undefined') { 
+      if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+        setShow(true); 
+      } else { // if scroll up show the navbar
+        setShow(false);  
+      }
+
+      // remember current page location to use in the next move
+      setLastScrollY(window.scrollY); 
+    }
+  };
+
+
   return (
     <>
-      <nav className="navbar">
+      <nav className={`active ${show && 'hidden'}`}>
         <img className="mainlogo" src="../images/logo.jpg" alt="img" />
         <Link to="/" className="navbar-logo" onClick={() => setSidebar(false)}>
           Wingrow Agritech

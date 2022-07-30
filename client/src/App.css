@@ -39,12 +39,6 @@ body {
   font-size: 10px;
 }
 
-
-.content{
-  height: 87vh;
-  margin-top: 13vh;
-}
-
 @media screen and (max-width: 700px) {
     body{
       font-size: 8px;

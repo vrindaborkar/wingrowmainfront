@@ -12,7 +12,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
-import './Login.css';
 
 
 function Copyright(props) {
@@ -83,7 +82,7 @@ const handleSubmit = async (event) => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 10,
+            marginTop: 5,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -146,8 +145,8 @@ const handleSubmit = async (event) => {
               </Grid>
             </Grid>
           </Box>
+          <Copyright sx={{ mt: 1, mb: 1 }} />
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

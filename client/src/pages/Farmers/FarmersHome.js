@@ -92,7 +92,7 @@ export default function FarmersHome() {
           </div>
           <div className='farmers_data'>
             <div className='inward_data'>
-              <h2 classname="heading_secondary">Inward Data</h2>
+              <h2 className="header_primary">Inward Data</h2>
               <div className='inward_info'>
                 {
                   (inwardData)?
@@ -123,22 +123,22 @@ export default function FarmersHome() {
                   <h2>No Inward Data</h2>
                 }
               </div>
-              <Link to={"../inward"}>
-              <button className='button'>
-                Fill Inward Data
-                </button>
-              </Link>
             </div>
+
+
             <div className='outward_data'>
-            <h2 classname="heading_secondary">Outward Data</h2>
+            <h2 className="header_primary">Outward Data</h2>
               <div className='outward_info'>
               {
                   (outwarddata&&outwarddata!==[]&&outwarddata!==undefined)?
-                  <div>
+                  <div className='outward_details'>
                     {
                       outwarddata.filter(e=>e.mobile_num===`${Data.phone}`).map((e)=>{
-                        const {data , total_cummulative_sales} = e
+                        const {data , total_cummulative_sales,farmers_market} = e
                         return(<div>
+                          <div>
+                            Market : {farmers_market}
+                          </div>
                           <div>
                             Total Cummulative Sales : {total_cummulative_sales}
                           </div>
@@ -155,17 +155,22 @@ export default function FarmersHome() {
                   </div>:
                   <h2>No Outward Data</h2>
                 }
+                
               </div>
-              <Link to={"../outward"}>
-                <button className='button'>
-                  Fill Outward Data
-                  </button>
-              </Link>
             </div>
           </div>
           <button className='logout_btn' onClick={handlelogoutbtn}>
             Logout
           </button>
+          <div className='buttons'>
+            <Link className='button' to={"../outward"}>
+                    Fill Outward Data
+                </Link>
+            <Link className='button' to={"../inward"}>
+                  Fill Inward Data
+            </Link>
+          </div>
+          
       </div>:<h2>Loading....</h2>}
       </div>
   );

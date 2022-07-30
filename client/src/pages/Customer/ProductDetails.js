@@ -2,7 +2,7 @@ import React,{useContext, useState} from 'react'
 import { useParams  } from 'react-router-dom';
 import "./customer_styles.css";
 import ShopContext from "../../context/shop-context";
-import MainNavigation from "../../components/MainNavigation";
+// import MainNavigation from "./MainNavigation";
 import SelectDropdown from '../../components/SelectDropdown';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -87,11 +87,11 @@ function ProductDetails() {
     <ShopContext.Consumer>
       {context => (
         <React.Fragment>
-          <MainNavigation
+          {/* <MainNavigation
             cartItemNumber={context.cart.reduce((count, curItem) => {
               return count + curItem.quantity;
             }, 0)}
-          />
+          /> */}
           <main className="customer_products">
             <div className="products_container">
               {context.products.filter(product =>

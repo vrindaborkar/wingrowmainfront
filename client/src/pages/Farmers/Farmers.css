@@ -1,7 +1,6 @@
 .main_farmers_page{
-    height: 100%;
     background-image: url('../../../public/images/green_leaf_back.jpg');
-    background-position: center;
+    background-position: stretch;
     background-size: cover;
 }
 
@@ -18,28 +17,23 @@
 .farmers_info{
     height: 20vh;
     width: 80vw;
-    margin: 1rem auto;
-    border: 1px black solid;
+    margin: .3rem auto;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .heading_primary{
     display: inline-block;
-    font-size: 1.6rem;
+    font-size: 2.2rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .farmers_data{
-    height: 67vh;
+    height: 100%;
     width: 80vw;
     margin: 1rem auto;
-    border: 1px black solid;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
     font-size: 1rem;
 }
 
@@ -48,26 +42,33 @@
     display: flex;
     flex: 1;
     height: 100%;
-    border-right: 1px black solid;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 1rem;
+    justify-content: center;
+    align-items: flex-start;
     flex-direction: column;
+    background-color: white;
+    border-right: 1px black solid;
+    overflow: auto;
+    width: 100%;
+    padding: 1rem;
 }
 
 .outward_data{
     display: flex;
+    width: 100%;
     flex: 1;
     height: 100%;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 1rem;
+    justify-content: center;
+    align-items: flex-start;
     flex-direction: column;
+    background-color: white;
+    overflow: auto;
+    padding: 1rem;
 }
 
-.heading_secondary{
+.header_primary{
     font: 1.3rem;
     font-weight: 600;
+    align-self: center;
 }
 
 
@@ -75,6 +76,16 @@
     position: absolute;
     top: 15vh;
     right: 5vw;
+    padding: .5rem;
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    transition: all .1s ease;
+}
+
+.logout_btn:hover{
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .inward_details{
@@ -84,13 +95,26 @@
     padding: 1rem;
     overflow: auto;
     scroll-behavior: smooth;
+    flex: 1;
+}
+
+.outward_details{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    padding: 1rem;
+    overflow: auto;
+    scroll-behavior: smooth;
+    flex: 1;
 }
 .inward_info{
     flex: 1;
+    width: 100%;
 }
 
 .outward_info{
     flex: 1;
+    width: 100%;
 }
 
 
@@ -107,11 +131,64 @@
     margin: 1rem;
     overflow: auto;
 }
-.body{
-    background-image: url("https://media.istockphoto.com/photos/farmers-food-market-stall-with-variety-of-organic-vegetable-picture-id487491992?k=20&m=487491992&s=612x612&w=0&h=GthWvbSMgJoRMd6uqupQjy8n1JAgvSgzvsEdiidIsdE=");
-    background-color: #cccccc;
-    background-position: center;
-    background-size: cover;
-    position: absolute;
-    opacity: 1 ;
+
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+}
+
+.button{
+    background-color:rgb(39, 129, 126);
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    padding: .8rem .8rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    width:10rem;
+    border-radius: 10px 100px / 120px;;
+    cursor:pointer;
+    margin: 0rem 1rem;
+}
+
+.button:hover{
+    background-color: rgb(18, 73, 71);
+}
+
+
+@media screen and (max-width: 850px) {
+    .farmers_data{
+        flex-direction: column;
+        overflow: scroll;
+        width: 100%;
+        border: none;
+        justify-content: flex-start;
+        padding: 1rem;
+
+    }
+
+    .inward_data{
+        height: 30vh;
+        width: 100%;
+        border: none;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px black solid;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    .outward_data{
+        height: 30vh;
+        width: 100%;
+        border: none;
+        justify-content: center;
+        margin: 1rem auto;
+        padding: 1rem;
+    }
 }

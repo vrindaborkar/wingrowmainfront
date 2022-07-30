@@ -1,6 +1,6 @@
 import React from "react";
 import ShopContext from "../../context/shop-context";
-import MainNavigation from "../../components/MainNavigation";
+// import MainNavigation from "./MainNavigation";
 import "./customer_styles.css";
 import Button from './Button'
 
@@ -9,11 +9,11 @@ const ProductsPage = () => {
     <ShopContext.Consumer>
       {context => (
         <React.Fragment>
-          <MainNavigation
+          {/* <MainNavigation
             cartItemNumber={context.cart.reduce((count, curItem) => {
               return count + curItem.quantity;
             }, 0)}
-          />
+          /> */}
           <main className="customer_products">
              <Button product={context.products}/>:
           </main>

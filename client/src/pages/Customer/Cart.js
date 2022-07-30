@@ -1,6 +1,6 @@
 import React, { useContext ,useState , useEffect } from "react";
 import ShopContext from "../../context/shop-context";
-import MainNavigation from "../../components/MainNavigation";
+// import MainNavigation from "./MainNavigation";
 import "./customer_styles.css";
 
 const CartPage = props => {
@@ -14,11 +14,11 @@ const CartPage = props => {
   }, [context.cart]);
   return (
     <React.Fragment>
-      <MainNavigation
+      {/* <MainNavigation
         cartItemNumber={context.cart.reduce((count, curItem) => {
           return count + curItem.quantity;
         }, 0)}
-      />
+      /> */}
       <main className="cart">
         {context.cart.length <= 0 && <p>No Item in the Cart!</p>}
         <div className="cart_container">
